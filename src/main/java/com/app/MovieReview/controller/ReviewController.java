@@ -42,12 +42,17 @@ public class ReviewController {
 
     @GetMapping("/find")
     public ResponseEntity<List<ReviewDTO>> getReview(@RequestParam Long reviewId){
-        try{
-            List<ReviewDTO> reviews = reviewService.getReviewById(reviewId);
-            return ResponseEntity.ok(reviews);
+        try {
+            List<ReviewDTO> review = reviewService.getReviewById(reviewId);
+            if (review != null) {
+                return ResponseEntity.ok(review);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
 
     }
 }

@@ -25,6 +25,14 @@ public class ReviewService {
 
     public List<ReviewDTO> getReviewById(Long reviewId) {
         Optional<Review> review= reviewRepository.findById(reviewId);
-        return review.map(Review->review.isPresent(reviewId)).orElse(null);
+        if(review.isPresent()){
+            ReviewDTO reviewDTO;
+            reviewDTO = new ReviewDTO(review.get().getId(),
+                    review.get().getMovieReview(),
+                    review.get().getRating(),review.get().getMovie() );
+            return List.of(reviewDTO);
+        }
+        return null;
+
     }
 }
