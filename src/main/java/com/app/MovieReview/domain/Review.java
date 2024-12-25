@@ -1,21 +1,20 @@
 package com.app.MovieReview.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 @Entity
 @Table(name = "review")
 public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String movieReview;
     private Double rating;
     @ManyToOne
-    @JoinColumn(name = "movie_id", nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "movie_id")
+
     private Movie movie;
 
     public Review(Long id, String movieReview, Double rating, Movie movie) {

@@ -1,9 +1,6 @@
 package com.app.MovieReview.domain;
 
 import jakarta.persistence.*;
-import org.hibernate.Length;
-import org.hibernate.annotations.NaturalId;
-
 import java.util.List;
 import java.util.Objects;
 
