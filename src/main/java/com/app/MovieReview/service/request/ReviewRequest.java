@@ -17,13 +17,13 @@ public class ReviewRequest {
 
         // Create a new Movie object and set the movieId
         Movie movie = new Movie();
-        movie.setId(movieId); // Set movie ID directly
+        movie.setId(movieId); 
 
         // Create a new Review object and set its fields
         Review review = new Review();
-        review.setMovieReview(movieReview); // Set the review text
-        review.setRating(rating);           // Set the rating
-        review.setMovie(movie);             // Associate the movie object
+        review.setMovieReview(movieReview);
+        review.setRating(rating);
+        review.setMovie(movie);
 
         return review;
 
