@@ -5,3 +5,4 @@ public class InvalidReviewException extends RuntimeException {
         super(message);
     }
 }
+//Created InvalidReviewException for handling invalid review data.
