@@ -1,6 +1,8 @@
 package com.app.MovieReview.domain;
 
+import com.app.MovieReview.service.response.MovieResponse;
 import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -43,6 +45,12 @@ public class Movie {
     public Movie() {
     }
 
+    public Movie(String title, Genre genre, double rating) {
+        this.title = title;
+        this.genre = genre;
+        this.rating = rating;
+    }
+
     public Long getId() {
         return id;
     }
@@ -75,7 +83,7 @@ public class Movie {
         this.rating = rating;
     }
 
-    public List<Review> getReviews() {
+    public List<Review> getReviews(){
         return reviews;
     }
 
@@ -104,6 +112,15 @@ public class Movie {
                 ", rating=" + rating +
                 ", reviews=" + reviews +
                 '}';
+    }
+
+    public MovieResponse toMovieResponse(){
+        return new MovieResponse(
+                this.title,
+                this.genre,
+                this.rating,
+                Review.toReviewResponse(this.reviews) // Convert reviews
+        );
     }
 
 }
