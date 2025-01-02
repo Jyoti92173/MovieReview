@@ -17,7 +17,7 @@ public class ReviewRequest {
 
         // Create a new Movie object and set the movieId
         Movie movie = new Movie();
-        movie.setId(movieId); 
+        movie.setId(movieId);
 
         // Create a new Review object and set its fields
         Review review = new Review();
