@@ -18,6 +18,6 @@ public class MovieResponse {
     private List<ReviewResponse> reviews;
 
     public MovieResponse(String title, Genre genre, Double rating, List<ReviewResponse> reviewResponse) {
-        
+
     }
 }
