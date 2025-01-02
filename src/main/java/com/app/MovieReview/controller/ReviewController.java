@@ -3,6 +3,7 @@ package com.app.MovieReview.controller;
 import com.app.MovieReview.domain.Movie;
 import com.app.MovieReview.domain.Review;
 import com.app.MovieReview.dto.ReviewDTO;
+import com.app.MovieReview.exception.InvalidReviewException;
 import com.app.MovieReview.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -26,12 +27,16 @@ public class ReviewController {
     @PostMapping("/add")
     public ResponseEntity<Review> addReview(@RequestBody ReviewDTO reviewSaveDTO) {
         try {
+            // Validate input fields
+            if (reviewSaveDTO.getMovieReview() == null || reviewSaveDTO.getMovieReview().isEmpty()) {
+                throw new InvalidReviewException("Review text cannot be empty");
+            }
+            // Create the Review object
+            Review review = new Review();
+            review.setMovieReview(reviewSaveDTO.getMovieReview());
+            review.setRating(reviewSaveDTO.getRating());
+            review.setMovie(reviewSaveDTO.getMovie());
 
-            Review review = new Review(
-                    reviewSaveDTO.getMovieReview(),
-                    reviewSaveDTO.getRating(),
-                    reviewSaveDTO.getMovie()
-            );
             Review savedReview = reviewService.addReview(review);
             return new ResponseEntity<>(savedReview, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -39,6 +44,7 @@ public class ReviewController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping("/find")
     public ResponseEntity<List<ReviewDTO>> getReview(@RequestParam Long reviewId){
